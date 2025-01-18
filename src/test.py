@@ -183,9 +183,9 @@ def main():
             print(f"Translated Response ({language}):", language_response)
 
             # SpeechGen synthesis (if needed)
-            speak_language_translation(language_translation, speechgen_key)
-            speak_language_response(language_response, speechgen_key)
-            speak_english_response(english_response, speechgen_key)
+            # speak_language_translation(language_translation, speechgen_key)
+            # speak_language_response(language_response, speechgen_key)
+            # speak_english_response(english_response, speechgen_key)
 
 
 if __name__ == "__main__":
