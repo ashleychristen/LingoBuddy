@@ -1,0 +1,8 @@
+'voice'=>'Brian',
+'format'=>'mp3',
+'speed'=>1.1,
+'pitch'=>0.8,
+'emotion'=>'good',
+'pause_sentence'=>300,
+'pause_paragraph'=>400,
+'bitrate'=>48000
