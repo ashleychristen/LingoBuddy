@@ -1,43 +1,49 @@
 # main.py
 # This script orchestrates the entire flow of the application.
 
-import logging
+import os
+from pathlib import Path
 from assemblyai import transcribe_audio
-from openai_utils import translate_to_language, generate_response, translate_response_to_language
+from openai_utils import translate_to_language, generate_response, translate_response_to_language, create_text_to_speech
 from speechgen import speak_language_translation, speak_language_response, speak_english_response
 from config import get_api_key
+from pitch import increase_pitch
 
 def main():
-    # logging.basicConfig(filename='logs/app.log', level=logging.INFO)
-    
-    # Load API keys
-    assemblyai_key = get_api_key('ASSEMBLYAI_API_KEY')
-    speechgen_key = get_api_key('SPEECHGEN_API_KEY')
-    
-    # Transcribe audio
-    # audio_file_path = 'path/to/audio/file'  # TODO: Update with actual path
-    # transcribed_text = transcribe_audio(audio_file_path, assemblyai_key)
-    # if not transcribed_text:
-    #     logging.error("Failed to transcribe audio.")
-    #     return
-
-    transcribed_text = 'Hello. How are you?'
-    language = 'Chinese'
+    transcribed_text = "Hello! How are you?"
+    language = 'Spanish'
+    emotion = 'Neutral'
     
     # OpenAI operations
-    language_translation = translate_to_language(language, transcribed_text)
-    english_response = generate_response(transcribed_text)
-    language_response = translate_response_to_language(language, english_response)
+    language_translation = translate_to_language(transcribed_text, language)
+    english_response = generate_response(transcribed_text, emotion)
+    language_response = translate_response_to_language(english_response, language)
 
+    # Print to console for debugging
     print(transcribed_text)
     print(language_translation)
     print(english_response)
     print(language_response)
     
-    # SpeechGen synthesis
-    # speak_language_translation(language_translation, speechgen_key)
-    # speak_language_response(language_response, speechgen_key)
-    # speak_english_response(english_response, speechgen_key)
+    # Create and speak (on mac) the files
+    speech_filepath = Path(__file__).parent / "speech.mp3"
+    pitched_filepath = Path(__file__).parent / "pitched_speech.mp3"
+
+    create_text_to_speech(language_translation, speech_filepath)
+    # os.system(f"afplay {speech_filepath}")
+    increase_pitch(speech_filepath)
+    os.system(f"afplay {pitched_filepath}")
+
+    create_text_to_speech(language_response, speech_filepath)
+    # os.system(f"afplay {speech_filepath}")
+    increase_pitch(speech_filepath)
+    os.system(f"afplay {pitched_filepath}")
+
+    create_text_to_speech(english_response, speech_filepath)
+    # os.system(f"afplay {speech_filepath}")
+    increase_pitch(speech_filepath)
+    os.system(f"afplay {pitched_filepath}")
+    
 
 if __name__ == "__main__":
     main()
