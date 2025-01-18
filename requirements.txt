@@ -1,3 +1,5 @@
 requests
 python-dotenv
 openai
+SpeechRecognition
+google-cloud-speech
