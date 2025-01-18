@@ -162,7 +162,6 @@ def main():
             print(f"Transcribed: {transcribed_text}")
             print(time.time())
 
-
             # OpenAI operations
             language_translation = translate_to_language(transcribed_text, language)
             print(time.time())
