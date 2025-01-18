@@ -10,7 +10,7 @@ from config import get_api_key
 from pitch import increase_pitch
 
 def main():
-    transcribed_text = "Hello! I'm coding for UofTHacks 12."
+    transcribed_text = "Hello! How are you?"
     language = 'Spanish'
     emotion = 'Neutral'
     

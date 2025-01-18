@@ -44,7 +44,7 @@ def generate_response(text, emotion):
                 },
                 {
                     "role": "user",
-                    "content": f"Generate an appropriate, brief response to this comment: {text}"
+                    "content": f"Generate an appropriate, brief (fewer than 7 words) response to this comment: {text}"
                 }
             ],
             max_tokens=100)
@@ -60,8 +60,8 @@ def translate_response_to_language(response, language):
 
 def create_text_to_speech(text, filepath):
     with client.audio.speech.with_streaming_response.create(
-        model="tts-1",
-        voice="sage",
+        model='tts-1',
+        voice='nova',
         input=f"{text}",
     ) as response:
         response.stream_to_file(filepath)
