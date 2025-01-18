@@ -5,7 +5,7 @@ import sys
 import time
 from assemblyai import transcribe_audio
 from openai_utils import translate_to_language, generate_response, translate_response_to_language
-from speechgen import speak_language_translation, speak_language_response, speak_english_response
+from tes_speech import speak_language_translation, speak_language_response, speak_english_response
 from config import get_api_key, get_email
 from google.cloud import speech
 import pyaudio
@@ -155,8 +155,8 @@ def transcribe_speech() -> str:
 
 def main():
     # Load Speeghgen API information
-    # speechgen_key = get_api_key('SPEECHGEN_API_KEY')
-    #speechgen_email = get_email('SPEECHGEN_EMAIL')
+    speechgen_key = get_api_key('SPEECHGEN_API_KEY')
+    speechgen_email = get_email('SPEECHGEN_EMAIL')
     
     language = 'French'  # Change as needed
     
@@ -183,9 +183,9 @@ def main():
             print(f"Translated Response ({language}):", language_response)
 
             # SpeechGen synthesis (if needed)
-            #speak_language_translation(language_translation, speechgen_key)
-            #speak_language_response(language_response, speechgen_key)
-            #speak_english_response(english_response, speechgen_key)
+            speak_language_translation(language_translation, speechgen_key)
+            speak_language_response(language_response, speechgen_key)
+            speak_english_response(english_response, speechgen_key)
 
 
 if __name__ == "__main__":
