@@ -59,8 +59,8 @@ def translate_response_to_language(response, language):
     return translate_to_language(response, language)
 
 
-def create_text_to_speech(text, filename):
-    speech_filepath = Path(__file__).parent / f"{filename}"
+def create_text_to_speech(text):
+    speech_filepath = Path(__file__).parent / "speech.mp3"
 
     with client.audio.speech.with_streaming_response.create(
         model="tts-1",
