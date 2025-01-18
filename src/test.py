@@ -1,12 +1,10 @@
-import logging
 import queue
-import re
 import sys
 import time
-from assemblyai import transcribe_audio
-from openai_utils import translate_to_language, generate_response, translate_response_to_language
-from tes_speech import speak_language_translation, speak_language_response, speak_english_response
-from config import get_api_key, get_email
+import os
+from pathlib import Path
+from openai_utils import translate_to_language, generate_response, translate_response_to_language, create_text_to_speech
+from pitch import increase_pitch
 from google.cloud import speech
 import pyaudio
 
@@ -149,21 +147,16 @@ def transcribe_speech() -> str:
         responses = client.streaming_recognize(streaming_config, requests)
         transcript = listen_print_loop(responses)
 
-        
-    transcribed_text = transcript
     return transcript
 
 def main():
-    # Load Speeghgen API information
-    speechgen_key = get_api_key('SPEECHGEN_API_KEY')
-    speechgen_email = get_email('SPEECHGEN_EMAIL')
-    
-    language = 'French'  # Change as needed
+    language = 'French'     # Change as needed
+    emotion = 'Neutral'     # Change with input from camera
     
     while True:
         transcribed_text = transcribe_speech()
+        # transcribed_text = "hello how are you!"
         print(transcribed_text)
-        #transcribed_text = "hello how are you!"
 
         if transcribed_text:
             print(f"Transcribed: {transcribed_text}")
@@ -171,21 +164,35 @@ def main():
 
 
             # OpenAI operations
-            language_translation = translate_to_language(language, transcribed_text)
+            language_translation = translate_to_language(transcribed_text, language)
             print(time.time())
-            english_response = generate_response(transcribed_text)
+            english_response = generate_response(transcribed_text, emotion)
             print(time.time())
-            language_response = translate_response_to_language(language, english_response)
+            language_response = translate_response_to_language(english_response, language)
             print(time.time())
 
             print(f"Translated ({language}):", language_translation)
             print("English Response:", english_response)
             print(f"Translated Response ({language}):", language_response)
 
-            # SpeechGen synthesis (if needed)
-            # speak_language_translation(language_translation, speechgen_key)
-            # speak_language_response(language_response, speechgen_key)
-            # speak_english_response(english_response, speechgen_key)
+            # # Create and speak (on mac) the files
+            speech_filepath = Path(__file__).parent / "speech.mp3"
+            pitched_filepath = Path(__file__).parent / "pitched_speech.mp3"
+
+            create_text_to_speech(language_translation, speech_filepath)
+            # os.system(f"afplay {speech_filepath}")
+            increase_pitch(speech_filepath)
+            os.system(f"afplay {pitched_filepath}")
+
+            create_text_to_speech(language_response, speech_filepath)
+            # os.system(f"afplay {speech_filepath}")
+            increase_pitch(speech_filepath)
+            os.system(f"afplay {pitched_filepath}")
+
+            create_text_to_speech(english_response, speech_filepath)
+            # os.system(f"afplay {speech_filepath}")
+            increase_pitch(speech_filepath)
+            os.system(f"afplay {pitched_filepath}")
 
 
 if __name__ == "__main__":

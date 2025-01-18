@@ -3,10 +3,7 @@
 
 import os
 from pathlib import Path
-from assemblyai import transcribe_audio
 from openai_utils import translate_to_language, generate_response, translate_response_to_language, create_text_to_speech
-from speechgen import speak_language_translation, speak_language_response, speak_english_response
-from config import get_api_key
 from pitch import increase_pitch
 
 def main():
