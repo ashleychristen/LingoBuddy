@@ -3,7 +3,6 @@
 
 from config import get_api_key
 from openai import OpenAI
-from pathlib import Path
 import logging
 
 # Initialize client
@@ -59,12 +58,10 @@ def translate_response_to_language(response, language):
     return translate_to_language(response, language)
 
 
-def create_text_to_speech(text):
-    speech_filepath = Path(__file__).parent / "speech.mp3"
-
+def create_text_to_speech(text, filepath):
     with client.audio.speech.with_streaming_response.create(
         model="tts-1",
         voice="sage",
         input=f"{text}",
     ) as response:
-        response.stream_to_file(speech_filepath)
+        response.stream_to_file(filepath)
