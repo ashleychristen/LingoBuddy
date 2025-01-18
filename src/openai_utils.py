@@ -1,34 +1,48 @@
 # openai_utils.py
 # This module handles all OpenAI API interactions.
 
-import openai
+from config import get_api_key
+from openai import OpenAI
 import logging
 
-def translate_to_chinese(text, api_key):
+# Initialize client
+openai_key = get_api_key('OPENAI_API_KEY')
+client = OpenAI(api_key=openai_key)
+
+def translate_to_chinese(text):
     try:
-        openai.api_key = api_key
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=f"Translate the following text to Chinese: {text}",
-            max_tokens=100
-        )
-        return response.choices[0].text.strip()
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a translator. Your job is to directly translate as accurately as " +
+                 "possible and say nothing else"},
+                {
+                    "role": "user",
+                    "content": f"Translate the following text into Chinese: {text}"
+                }
+            ],
+            max_tokens=100)
+        return response.choices[0].message.content.strip()
     except Exception as e:
         logging.error(f"Error during translation to Chinese: {e}")
         return None
 
-def generate_response(text, api_key):
+def generate_response(text):
     try:
-        openai.api_key = api_key
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=f"Respond to the following text: {text}",
-            max_tokens=150
-        )
-        return response.choices[0].text.strip()
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a toy, and a child is speaking to you."},
+                {
+                    "role": "user",
+                    "content": f"Generate an appropriate response to this comment: {text}"
+                }
+            ],
+            max_tokens=100)
+        return response.choices[0].message.content.strip()
     except Exception as e:
         logging.error(f"Error during response generation: {e}")
         return None
 
-def translate_response_to_chinese(response, api_key):
-    return translate_to_chinese(response, api_key)
+def translate_response_to_chinese(response):
+    return translate_to_chinese(response)

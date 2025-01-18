@@ -8,11 +8,10 @@ from speechgen import speak_chinese_translation, speak_chinese_response, speak_e
 from config import get_api_key
 
 def main():
-    logging.basicConfig(filename='logs/app.log', level=logging.INFO)
+    # logging.basicConfig(filename='logs/app.log', level=logging.INFO)
     
     # Load API keys
     assemblyai_key = get_api_key('ASSEMBLYAI_API_KEY')
-    openai_key = get_api_key('OPENAI_API_KEY')
     speechgen_key = get_api_key('SPEECHGEN_API_KEY')
     
     # Transcribe audio
@@ -25,9 +24,9 @@ def main():
     transcribed_text = 'Hello. How are you?'
     
     # OpenAI operations
-    chinese_translation = translate_to_chinese(transcribed_text, openai_key)
-    english_response = generate_response(transcribed_text, openai_key)
-    chinese_response = translate_response_to_chinese(english_response, openai_key)
+    chinese_translation = translate_to_chinese(transcribed_text)
+    english_response = generate_response(transcribed_text)
+    chinese_response = translate_response_to_chinese(english_response)
 
     print(transcribed_text)
     print(chinese_translation)
