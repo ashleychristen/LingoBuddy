@@ -22,7 +22,7 @@ def main():
     #     return
 
     transcribed_text = 'Hello. How are you?'
-    language = 'German'
+    language = 'Chinese'
     
     # OpenAI operations
     language_translation = translate_to_language(language, transcribed_text)

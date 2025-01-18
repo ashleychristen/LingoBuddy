@@ -35,7 +35,7 @@ def generate_response(text):
                 {"role": "system", "content": "You are a toy, and a child is speaking to you."},
                 {
                     "role": "user",
-                    "content": f"Generate an appropriate response to this comment: {text}"
+                    "content": f"Generate an appropriate, brief response to this comment: {text}"
                 }
             ],
             max_tokens=100)
