@@ -4,7 +4,7 @@
 import logging
 from assemblyai import transcribe_audio
 from openai_utils import translate_to_language, generate_response, translate_response_to_language
-from speechgen import speak_chinese_translation, speak_chinese_response, speak_english_response
+from speechgen import speak_language_translation, speak_language_response, speak_english_response
 from config import get_api_key
 
 def main():
@@ -25,18 +25,18 @@ def main():
     language = 'German'
     
     # OpenAI operations
-    chinese_translation = translate_to_language(language, transcribed_text)
+    language_translation = translate_to_language(language, transcribed_text)
     english_response = generate_response(transcribed_text)
-    chinese_response = translate_response_to_language(language, english_response)
+    language_response = translate_response_to_language(language, english_response)
 
     print(transcribed_text)
-    print(chinese_translation)
+    print(language_translation)
     print(english_response)
-    print(chinese_response)
+    print(language_response)
     
     # SpeechGen synthesis
-    # speak_chinese_translation(chinese_translation, speechgen_key)
-    # speak_chinese_response(chinese_response, speechgen_key)
+    # speak_language_translation(language_translation, speechgen_key)
+    # speak_language_response(language_response, speechgen_key)
     # speak_english_response(english_response, speechgen_key)
 
 if __name__ == "__main__":

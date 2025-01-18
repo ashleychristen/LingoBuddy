@@ -21,10 +21,10 @@ def text_to_speech(text, language, api_key):
         logging.error(f"Error during text-to-speech synthesis: {e}")
         return None
 
-def speak_chinese_translation(input_text, api_key):
+def speak_language_translation(input_text, api_key):
     return text_to_speech(input_text, 'zh', api_key)
 
-def speak_chinese_response(response_text, api_key):
+def speak_language_response(response_text, api_key):
     return text_to_speech(response_text, 'zh', api_key)
 
 def speak_english_response(response_text, api_key):
