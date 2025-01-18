@@ -21,13 +21,14 @@ def main():
     #     logging.error("Failed to transcribe audio.")
     #     return
 
-    transcribed_text = 'Hello. How are you?'
-    language = 'Chinese'
+    transcribed_text = "Hello. My friend has not messaged me back."
+    language = "German"
+    emotion = "Sad"
     
     # OpenAI operations
-    language_translation = translate_to_language(language, transcribed_text)
-    english_response = generate_response(transcribed_text)
-    language_response = translate_response_to_language(language, english_response)
+    language_translation = translate_to_language(transcribed_text, language)
+    english_response = generate_response(transcribed_text, emotion)
+    language_response = translate_response_to_language(english_response, language)
 
     print(transcribed_text)
     print(language_translation)

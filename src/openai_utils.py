@@ -9,13 +9,15 @@ import logging
 openai_key = get_api_key('OPENAI_API_KEY')
 client = OpenAI(api_key=openai_key)
 
-def translate_to_language(language, text):
+def translate_to_language(text, language):
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a translator. Your job is to directly translate as accurately as " +
-                 "possible and say nothing else"},
+                {
+                    "role": "system", 
+                    "content": "You are a translator. Your job is to directly translate phrases to their cultural equivalent " +
+                    "and say nothing else."},
                 {
                     "role": "user",
                     "content": f"Translate the following text into {language}: {text}"
@@ -27,12 +29,15 @@ def translate_to_language(language, text):
         logging.error(f"Error during translation to {language}: {e}")
         return None
 
-def generate_response(text):
+def generate_response(text, emotion):
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a toy, and a child is speaking to you."},
+                {
+                    "role": "system", 
+                    "content": "You are a toy, and a child is speaking to you. Judging by their expression and sentiment, " + 
+                    f"they might be feeling {emotion}. If they are feeling neutral, disregard it when generating a response."},
                 {
                     "role": "user",
                     "content": f"Generate an appropriate, brief response to this comment: {text}"
