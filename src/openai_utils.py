@@ -9,7 +9,7 @@ import logging
 openai_key = get_api_key('OPENAI_API_KEY')
 client = OpenAI(api_key=openai_key)
 
-def translate_to_chinese(text):
+def translate_to_language(language, text):
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -18,13 +18,13 @@ def translate_to_chinese(text):
                  "possible and say nothing else"},
                 {
                     "role": "user",
-                    "content": f"Translate the following text into Chinese: {text}"
+                    "content": f"Translate the following text into {language}: {text}"
                 }
             ],
             max_tokens=100)
         return response.choices[0].message.content.strip()
     except Exception as e:
-        logging.error(f"Error during translation to Chinese: {e}")
+        logging.error(f"Error during translation to {language}: {e}")
         return None
 
 def generate_response(text):
@@ -44,5 +44,5 @@ def generate_response(text):
         logging.error(f"Error during response generation: {e}")
         return None
 
-def translate_response_to_chinese(response):
-    return translate_to_chinese(response)
+def translate_response_to_language(language, response):
+    return translate_to_language(language, response)

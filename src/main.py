@@ -3,7 +3,7 @@
 
 import logging
 from assemblyai import transcribe_audio
-from openai_utils import translate_to_chinese, generate_response, translate_response_to_chinese
+from openai_utils import translate_to_language, generate_response, translate_response_to_language
 from speechgen import speak_chinese_translation, speak_chinese_response, speak_english_response
 from config import get_api_key
 
@@ -22,11 +22,12 @@ def main():
     #     return
 
     transcribed_text = 'Hello. How are you?'
+    language = 'German'
     
     # OpenAI operations
-    chinese_translation = translate_to_chinese(transcribed_text)
+    chinese_translation = translate_to_language(language, transcribed_text)
     english_response = generate_response(transcribed_text)
-    chinese_response = translate_response_to_chinese(english_response)
+    chinese_response = translate_response_to_language(language, english_response)
 
     print(transcribed_text)
     print(chinese_translation)
