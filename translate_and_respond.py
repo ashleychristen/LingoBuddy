@@ -1,3 +1,6 @@
+
+# OLD but keeping it just in case
+
 import os
 import requests
 from dotenv import load_dotenv
