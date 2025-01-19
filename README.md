@@ -4,26 +4,29 @@ The Endangered Language Learning Elmo is a conversational AI-powered toy designe
 
 ## How It Works
 ### Program Flow
-1. Language Selection:
-- When the program is run, Elmo asks the child what language they want to learn or speak.
-2. Speech Recognition:
-- The child speaks to Elmo in English.
-- Using Google Cloud Speech-to-Text, the spoken words are transcribed into text.
-3. Language Translation:
-- The transcribed text is sent to the OpenAI API, which translates it into the selected language.
-4. Conversational Response:
+1. **Language Selection**:
+  - When the program is run, Elmo asks the child what language they want to learn or speak.
+2. **Speech Recognition**:
+  - The child speaks to Elmo in English.
+  - Using Google Cloud Speech-to-Text, the spoken words are transcribed into text.
+3. **Language Translation**:
+  - The transcribed text is sent to the OpenAI API, which translates it into the selected language.
+4. **Conversational Response**:
 - Elmo repeats the child’s message in the chosen language.
-- Elmo also responds to the child in both English and the selected language, ensuring comprehension while encouraging language learning.
-5. Text-to-Speech Conversion:
-- Responses are converted into audio using SpeechGen.io to give Elmo a realistic voice in whatever language being spoken.
-6. Facial Emotion Recognition:
-- Using an open-source facial emotion recognition repository, the child’s emotions are analyzed in real-time.
-- Elmo adapts his responses based on the child’s detected emotional state (e.g., using a more encouraging tone if the child seems frustrated).
+- E  lmo also responds to the child in both English and the selected language, ensuring comprehension while encouraging language learning.
+5. **Text-to-Speech Conversion**:
+  - Responses are converted into audio using SpeechGen.io to give Elmo a realistic voice in whatever language being spoken.
+6. **Facial Emotion Recognition**:
+  - Using an open-source facial emotion recognition repository, the child’s emotions are analyzed in real-time.
+  - Elmo adapts his responses based on the child’s detected emotional state (e.g., using a more encouraging tone if the child seems frustrated).
 
 ## Technologies Used
 **Google Cloud Speech-to-Text**: For transcribing the child’s spoken words into text.
+
 **OpenAI API**: For translating the child’s text and generating appropriate responses.
+
 **SpeechGen.io**: For converting Elmo’s responses into spoken audio.
+
 **OpenCV** + **DeepFace**: For real-time facial emotion recognition.
 
 ## Key Features
