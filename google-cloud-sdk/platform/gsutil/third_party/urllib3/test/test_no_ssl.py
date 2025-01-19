@@ -8,7 +8,7 @@ Test what happens if Python was built without SSL
 from __future__ import annotations
 
 import sys
-from speechgen.speechgen import ImportBlocker, ModuleStash
+from speechgen.speechgen_work import ImportBlocker, ModuleStash
 
 import pytest
 

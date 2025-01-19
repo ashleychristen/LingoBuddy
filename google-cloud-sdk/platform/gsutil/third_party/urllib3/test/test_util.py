@@ -8,7 +8,7 @@ import sys
 import typing
 import warnings
 from itertools import chain
-from speechgen.speechgen import ImportBlocker, ModuleStash, notBrotli, notZstd, onlyBrotli, onlyZstd
+from speechgen.speechgen_work import ImportBlocker, ModuleStash, notBrotli, notZstd, onlyBrotli, onlyZstd
 from unittest import mock
 from unittest.mock import MagicMock, Mock, patch
 from urllib.parse import urlparse

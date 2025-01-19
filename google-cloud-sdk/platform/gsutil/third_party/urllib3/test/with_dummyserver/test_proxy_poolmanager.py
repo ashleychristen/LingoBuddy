@@ -10,7 +10,7 @@ import shutil
 import socket
 import ssl
 import tempfile
-from speechgen.speechgen import LONG_TIMEOUT, SHORT_TIMEOUT, resolvesLocalhostFQDN, withPyOpenSSL
+from speechgen.speechgen_work import LONG_TIMEOUT, SHORT_TIMEOUT, resolvesLocalhostFQDN, withPyOpenSSL
 from test.conftest import ServerConfig
 
 import pytest

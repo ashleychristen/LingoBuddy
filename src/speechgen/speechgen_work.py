@@ -1,7 +1,6 @@
 import requests
 import json
 import os
-from main import *
 from datetime import datetime
 
 # Constants
@@ -9,6 +8,23 @@ API_URL = "https://speechgen.io/index.php?r=api/text"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Gets the directory where the script is
 MP3_DIR = os.path.join(BASE_DIR, "mp3")
 LOG_FILE = os.path.join(BASE_DIR, "speechgen.log")
+lang_dict = {
+    'English': 'Anny',
+    'Welsh': 'Nia',
+    'Basque': 'Ainhoa',
+    'Maltese': 'Ganni',
+    'Galician': 'Sabela',
+    'Zulu': 'Thando',
+    'Amharic': 'Mekdes',
+    'Azerbaijani': 'Banu',
+    'Catalan': 'Joana',
+    'Khmer': 'Sreymom',
+    'Cantonese': 'XiaoMin',
+    'Shanghainese': 'Xiaotong',
+    'Mandarin': 'Xiaobei',
+    'Spanish': 'Irene',
+    'German': 'Gisela'
+}
 
 def make_speech(text, language, path):
     voice = grab_language(language)
@@ -20,25 +36,12 @@ def load_api_credentials():
         return json.load(f)
 
 def grab_language(language):
-    lang_dict = {}
-    lang_dict['English'] = 'Anny'
-    lang_dict['Welsh'] = 'Nia'
-    lang_dict['Basque'] = 'Ainhoa'
-    lang_dict['Maltese'] = 'Ganni'
-    lang_dict['Galician'] = 'Sabela'
-    lang_dict['Zulu'] = 'Thando'
-    lang_dict['Amharic'] = 'Mekdes'
-    lang_dict['Azerbaijani'] = 'Banu'
-    lang_dict['Catalan'] = 'Joana'
-    lang_dict['Khmer'] = 'Sreymom'
-    lang_dict['Cantonese'] = 'XiaoMin'
-    lang_dict['Shanghainese'] = 'Xiaotong'
-    lang_dict['Mandarin'] = 'Xiaobei'
-    lang_dict['Spanish'] = 'Irene'
-
+    global lang_dict
     if language.title() in lang_dict:
+        print(lang_dict[language])
         return lang_dict[language]
     else:
+        print("annny")
         return 'Anny'
 
 def load_settings(voice):

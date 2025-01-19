@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import gzip
 import typing
-from speechgen.speechgen import LONG_TIMEOUT
+from speechgen.speechgen_work import LONG_TIMEOUT
 from unittest import mock
 
 import pytest

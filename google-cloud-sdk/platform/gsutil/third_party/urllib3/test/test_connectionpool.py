@@ -7,7 +7,7 @@ from http.client import HTTPException
 from queue import Empty
 from socket import error as SocketError
 from ssl import SSLError as BaseSSLError
-from speechgen.speechgen import SHORT_TIMEOUT
+from speechgen.speechgen_work import SHORT_TIMEOUT
 from unittest.mock import Mock, patch
 
 import pytest
