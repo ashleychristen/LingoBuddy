@@ -33,8 +33,10 @@ The Endangered Language Learning Elmo is a conversational AI-powered toy designe
 **Language Learning**:
 - Encourages conversational practice in endangered languages.
 - Provides immediate translation and responses to immerse children in the language.
+
 **Emotionally Intelligent Responses**:
 - Analyzes the child’s facial expressions to detect emotions such as happiness, sadness, or frustration.
 - Tailors Elmo’s tone and response to create a more engaging and empathetic experience.
+
 **Bilingual Feedback**:
 - Combines English and the selected language in responses to enhance understanding and encourage learning.
