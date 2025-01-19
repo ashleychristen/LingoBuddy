@@ -92,35 +92,41 @@ class MicrophoneStream:
 
 def listen_print_loop(responses):
     num_chars_printed = 0
-    start_time = time.time()  # Record the start time
+    start_time = time.time()
+    end_time = start_time + 3  # Set the duration to 3 seconds
+    transcript = ""
+    interim_buffer = ""  # Buffer for interim results
 
-    for response in responses:
-        elapsed_time = time.time() - start_time  # Calculate elapsed time
+    while time.time() < end_time:
+        try:
+            response = next(responses)
 
-        if elapsed_time >= 3:
-            print("Exiting after 3 seconds.")
+            if not response.results:
+                continue
+
+            result = response.results[0]
+            if not result.alternatives:
+                continue
+
+            current_transcript = result.alternatives[0].transcript
+
+            if result.is_final:
+                # Add final result to transcript and clear interim buffer
+                transcript += f"{current_transcript} "
+                interim_buffer = ""
+                print(current_transcript)  # Show the final result
+                num_chars_printed = 0
+            else:
+                # Buffer interim results for smoother display
+                interim_buffer = current_transcript
+                overwrite_chars = " " * (num_chars_printed - len(interim_buffer))
+                sys.stdout.write(interim_buffer + overwrite_chars + "\r")
+                sys.stdout.flush()
+                num_chars_printed = len(interim_buffer)
+        except StopIteration:
             break
 
-        if not response.results:
-            continue
-
-        result = response.results[0]
-        if not result.alternatives:
-            continue
-
-        transcript = result.alternatives[0].transcript
-        overwrite_chars = " " * (num_chars_printed - len(transcript))
-
-        if not result.is_final:
-            sys.stdout.write(transcript + overwrite_chars + "\r")
-            sys.stdout.flush()
-            num_chars_printed = len(transcript)
-        else:
-            print(transcript + overwrite_chars)
-            num_chars_printed = 0
-
-    print(time.time())
-    return transcript
+    return transcript.strip()
 
 
 def transcribe_speech() -> str:
@@ -149,49 +155,53 @@ def transcribe_speech() -> str:
 
     return transcript
 
+
 def main():
     language = 'French'     # Change as needed
     emotion = 'Neutral'     # Change with input from camera
     
     while True:
+        chime_filepath = Path(__file__).parent / "mp3/chime.mp3"
+        os.system(f"afplay {chime_filepath}")
+
         transcribed_text = transcribe_speech()
-        # transcribed_text = "hello how are you!"
         print(transcribed_text)
 
         if transcribed_text:
             print(f"Transcribed: {transcribed_text}")
-            print(time.time())
 
             # OpenAI operations
             language_translation = translate_to_language(transcribed_text, language)
-            print(time.time())
             english_response = generate_response(transcribed_text, emotion)
-            print(time.time())
             language_response = translate_response_to_language(english_response, language)
-            print(time.time())
 
             print(f"Translated ({language}):", language_translation)
             print("English Response:", english_response)
             print(f"Translated Response ({language}):", language_response)
 
-            # # Create and speak (on mac) the files
-            speech_filepath = Path(__file__).parent / "speech.mp3"
-            pitched_filepath = Path(__file__).parent / "pitched_speech.mp3"
+            # Create text to speech mp3s
+            input_translation_filepath = Path(__file__).parent / "mp3/input_translation.mp3"
+            pitched_input_translation_filepath = Path(__file__).parent / "mp3/pitched_input_translation.mp3"
+            create_text_to_speech(language_translation, input_translation_filepath)
+            # os.system(f"afplay {input_translation_filepath}")
+            increase_pitch(input_translation_filepath, "mp3/pitched_input_translation.mp3")
 
-            create_text_to_speech(language_translation, speech_filepath)
-            # os.system(f"afplay {speech_filepath}")
-            increase_pitch(speech_filepath)
-            os.system(f"afplay {pitched_filepath}")
+            english_response_filepath = Path(__file__).parent / "mp3/english_response.mp3"
+            pitched_english_response_filepath = Path(__file__).parent / "mp3/pitched_english_response.mp3"
+            create_text_to_speech(english_response, english_response_filepath)
+            # os.system(f"afplay {english_response_filepath}")
+            increase_pitch(english_response_filepath, "mp3/pitched_english_response.mp3")
+            
+            language_response_filepath = Path(__file__).parent / "mp3/language_response.mp3"
+            pitched_language_response_filepath = Path(__file__).parent / "mp3/pitched_language_response.mp3"
+            create_text_to_speech(language_response, language_response_filepath)
+            # os.system(f"afplay {language_response_filepath}")
+            increase_pitch(language_response_filepath, "mp3/pitched_language_response.mp3")
 
-            create_text_to_speech(language_response, speech_filepath)
-            # os.system(f"afplay {speech_filepath}")
-            increase_pitch(speech_filepath)
-            os.system(f"afplay {pitched_filepath}")
-
-            create_text_to_speech(english_response, speech_filepath)
-            # os.system(f"afplay {speech_filepath}")
-            increase_pitch(speech_filepath)
-            os.system(f"afplay {pitched_filepath}")
+            # Speak files (MacOS only)
+            os.system(f"afplay {pitched_input_translation_filepath}")
+            os.system(f"afplay {pitched_language_response_filepath}")
+            os.system(f"afplay {pitched_english_response_filepath}")
 
 
 if __name__ == "__main__":
