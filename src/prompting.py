@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from test import transcribe_speech
+from transcribe import transcribe_speech
 from openai_utils import get_language, create_text_to_speech
 
 def prompt_output_language():

@@ -1,5 +1,11 @@
-# mp3 files
-mp3/
+# most mp3 files
+english_response.mp3
+input_translation.mp3
+language_confirmation.mp3
+language_response.mp3
+pitched_english_response.mp3
+pitched_input_translation.mp3
+pitched_language_response.mp3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

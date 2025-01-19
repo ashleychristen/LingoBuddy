@@ -62,7 +62,8 @@ def get_language(text):
                 {
                     "role": "system", 
                     "content": "You are an input validation assistant. A string will be provided that contains a language. Return " +
-                    "nothing but the name of the language."
+                    "nothing but the name of the language. If it contains two languages, choose the first, unless the first is English " +
+                    "then choose the other."
                 },
                 {
                     "role": "user",
