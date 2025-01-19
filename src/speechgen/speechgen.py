@@ -10,9 +10,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Gets the directory wher
 MP3_DIR = os.path.join(BASE_DIR, "mp3")
 LOG_FILE = os.path.join(BASE_DIR, "speechgen.log")
 
-def do_it_all(text, language):
-    settings = load_settings(language)
-    convert_text_to_speech(settings, text)
+def make_speech(text, language, path):
+    voice = grab_language(language)
+    settings = load_settings(voice)
+    convert_text_to_speech(settings, text, path)
 
 def load_api_credentials():
     with open(os.path.join(BASE_DIR, "api.txt")) as f:
@@ -35,15 +36,18 @@ def grab_language(language):
     lang_dict['Mandarin'] = 'Xiaobei'
     lang_dict['Spanish'] = 'Irene'
 
-    if
+    if language.title() in lang_dict:
+        return lang_dict[language]
+    else:
+        return 'Anny'
 
-def load_settings(language):
+def load_settings(voice):
     # with open(os.path.join(BASE_DIR, "settings.txt")) as f:
         # settings_text = f.read()
         # Convert the settings format to a dictionary
     settings_dict = {}
     settings_dict['format'] = 'mp3'
-    settings_dict['voice'] = language
+    settings_dict['voice'] = voice
     settings_dict['speed'] = 1.0
     settings_dict['pitch'] = 1.6
     settings_dict['emotion'] = 'good'
@@ -73,7 +77,7 @@ def log_message(message, to_console=True):
     with open(LOG_FILE, 'a', encoding='utf-8') as f:
         f.write(log_entry + "\n")
 
-def convert_text_to_speech(settings, text):
+def convert_text_to_speech(settings, text, path):
     try:
         # Load credentials, settings, and text
         credentials = load_api_credentials()
@@ -106,7 +110,7 @@ def convert_text_to_speech(settings, text):
             file_id = response.get('id', 'output')
             voice = settings.get('voice', 'default')
             
-            output_path = os.path.join(MP3_DIR, f'{file_id}_{voice}.{file_format}')
+            output_path = os.path.join(MP3_DIR, f'{path}')
             
             # Download and save the audio file
             audio_content = requests.get(file_url).content

@@ -8,6 +8,7 @@ from prompting import prompt_output_language
 from pitch import increase_pitch
 from transcribe import transcribe_speech
 from facial.emotion import start_video, end_video, get_curr_emotion
+from speechgen.speechgen import make_speech
 
 def main():
     # start_video()
@@ -38,28 +39,28 @@ def main():
             print(f"Translated Response ({language}):", language_response)
 
             # Create text to speech mp3s
-            input_translation_filepath = Path(__file__).parent / "mp3/input_translation.mp3"
-            pitched_input_translation_filepath = Path(__file__).parent / "mp3/pitched_input_translation.mp3"
-            create_text_to_speech(language_translation, input_translation_filepath)
+            input_translation_filepath = Path(__file__).parent / "src/mp3/input_translation.mp3"
+            #pitched_input_translation_filepath = Path(__file__).parent / "mp3/pitched_input_translation.mp3"
+            make_speech(language_translation, input_translation_filepath)
             # os.system(f"afplay {input_translation_filepath}")
-            increase_pitch(input_translation_filepath, "mp3/pitched_input_translation.mp3")
+            #increase_pitch(input_translation_filepath, "mp3/pitched_input_translation.mp3")
 
-            english_response_filepath = Path(__file__).parent / "mp3/english_response.mp3"
-            pitched_english_response_filepath = Path(__file__).parent / "mp3/pitched_english_response.mp3"
-            create_text_to_speech(english_response, english_response_filepath)
+            english_response_filepath = Path(__file__).parent / "src/mp3/english_response.mp3"
+            #pitched_english_response_filepath = Path(__file__).parent / "mp3/pitched_english_response.mp3"
+            make_speech(english_response, english_response_filepath)
             # os.system(f"afplay {english_response_filepath}")
-            increase_pitch(english_response_filepath, "mp3/pitched_english_response.mp3")
+            # increase_pitch(english_response_filepath, "mp3/pitched_english_response.mp3")
             
-            language_response_filepath = Path(__file__).parent / "mp3/language_response.mp3"
-            pitched_language_response_filepath = Path(__file__).parent / "mp3/pitched_language_response.mp3"
-            create_text_to_speech(language_response, language_response_filepath)
+            language_response_filepath = Path(__file__).parent / "src/mp3/language_response.mp3"
+            #pitched_language_response_filepath = Path(__file__).parent / "mp3/pitched_language_response.mp3"
+            make_speech(language_response, language_response_filepath)
             # os.system(f"afplay {language_response_filepath}")
-            increase_pitch(language_response_filepath, "mp3/pitched_language_response.mp3")
+            # increase_pitch(language_response_filepath, "mp3/pitched_language_response.mp3")
 
             # Speak files (MacOS only)
-            os.system(f"afplay {pitched_input_translation_filepath}")
-            os.system(f"afplay {pitched_language_response_filepath}")
-            os.system(f"afplay {pitched_english_response_filepath}")
+            os.system(f"afplay {input_translation_filepath}")
+            os.system(f"afplay {language_response_filepath}")
+            os.system(f"afplay {english_response_filepath}")
 
     end_video()
 
