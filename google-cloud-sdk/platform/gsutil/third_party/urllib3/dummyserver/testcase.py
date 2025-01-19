@@ -5,7 +5,7 @@ import socket
 import ssl
 import threading
 import typing
-from test import LONG_TIMEOUT
+from speechgen.speechgen_work import LONG_TIMEOUT
 
 import hypercorn
 import pytest

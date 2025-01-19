@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pickle
 from email.errors import MessageDefect
-from test import DUMMY_POOL
+from speechgen.speechgen_work import DUMMY_POOL
 
 import pytest
 

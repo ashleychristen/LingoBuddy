@@ -8,7 +8,7 @@ import ssl
 import tempfile
 import warnings
 from pathlib import Path
-from test import (
+from speechgen.speechgen_work import (
     LONG_TIMEOUT,
     SHORT_TIMEOUT,
     TARPIT_HOST,

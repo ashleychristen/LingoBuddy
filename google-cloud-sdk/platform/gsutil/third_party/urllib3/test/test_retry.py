@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import datetime
-from test import DUMMY_POOL
+from speechgen.speechgen_work import DUMMY_POOL
 from unittest import mock
 
 import pytest
