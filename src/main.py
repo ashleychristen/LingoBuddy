@@ -7,15 +7,20 @@ from openai_utils import translate_to_language, generate_response, translate_res
 from prompting import prompt_output_language
 from pitch import increase_pitch
 from transcribe import transcribe_speech
+from facial.emotion import start_video, end_video, get_curr_emotion
 
 def main():
+    # start_video()
+    print("Prompting user to select language...")
     language = prompt_output_language()
-    emotion = 'Neutral'     # Change with input from camera
     
     while True:
+        print("Indicating user to begin speaking...")
         chime_filepath = Path(__file__).parent / "mp3/chime.mp3"
         os.system(f"afplay {chime_filepath}")
 
+        emotion = get_curr_emotion()
+        print(f"Emotion: {emotion}")
         transcribed_text = transcribe_speech()
 
         if transcribed_text:
@@ -53,6 +58,8 @@ def main():
             os.system(f"afplay {pitched_input_translation_filepath}")
             os.system(f"afplay {pitched_language_response_filepath}")
             os.system(f"afplay {pitched_english_response_filepath}")
+
+    end_video()
 
 
 if __name__ == "__main__":
