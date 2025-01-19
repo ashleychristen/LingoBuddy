@@ -23,9 +23,9 @@ The Endangered Language Learning Elmo is a conversational AI-powered toy designe
 ## Technologies Used
 **Google Cloud Speech-to-Text**: For transcribing the child’s spoken words into text.
 
-**OpenAI API**: For translating the child’s text and generating appropriate responses.
+**OpenAI API**: For translating the child’s text and generating appropriate responses based on emotion and culture.
 
-**SpeechGen.io**: For converting Elmo’s responses into spoken audio.
+**SpeechGen.io**: For converting Elmo’s responses into spoken audio in various languages.
 
 **OpenCV** + **DeepFace**: For real-time facial emotion recognition.
 
