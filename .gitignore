@@ -7,6 +7,8 @@ pitched_english_response.mp3
 pitched_input_translation.mp3
 pitched_language_response.mp3
 
+package-lock.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
