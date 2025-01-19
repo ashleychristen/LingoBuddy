@@ -3,7 +3,7 @@ import sys
 import time
 import os
 from pathlib import Path
-from openai_utils import translate_to_language, generate_response, translate_response_to_language, create_text_to_speech
+from openai_utils import translate_to_language, generate_response, translate_response_to_language, create_text_to_speech, get_language
 from pitch import increase_pitch
 from google.cloud import speech
 import pyaudio
@@ -156,8 +156,31 @@ def transcribe_speech() -> str:
     return transcript
 
 
+def prompt_output_language():
+    # Prompt the user to choose a language
+    prompt_filepath = Path(__file__).parent / "mp3/language_prompt.mp3"
+    create_text_to_speech("What language would you like me to speak in?", prompt_filepath)
+    os.system(f"afplay {prompt_filepath}")
+
+    while True:
+        # Indicate to start speaking
+        chime_filepath = Path(__file__).parent / "mp3/chime.mp3"
+        os.system(f"afplay {chime_filepath}")
+        
+        # Listen for a response
+        transcribed_text = transcribe_speech()
+        
+        if transcribed_text:
+            print(f"Transcribed: {transcribed_text}")
+            language = get_language(transcribed_text)
+            confirmation_filepath = Path(__file__).parent / "mp3/language_confirmation.mp3"
+            create_text_to_speech(f"Got it. I'll speak in {language}", confirmation_filepath)
+            os.system(f"afplay {confirmation_filepath}")
+            return language
+
+
 def main():
-    language = 'French'     # Change as needed
+    language = prompt_output_language()
     emotion = 'Neutral'     # Change with input from camera
     
     while True:
@@ -165,7 +188,6 @@ def main():
         os.system(f"afplay {chime_filepath}")
 
         transcribed_text = transcribe_speech()
-        print(transcribed_text)
 
         if transcribed_text:
             print(f"Transcribed: {transcribed_text}")
