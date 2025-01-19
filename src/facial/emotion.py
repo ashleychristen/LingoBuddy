@@ -3,8 +3,6 @@ from deepface import DeepFace
 import tensorflow as tf
 print("TensorFlow version:", tf.__version__)  # Add this to verify TensorFlow is working
 
-
-
 # Load face cascade classifier
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
