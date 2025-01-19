@@ -23,7 +23,13 @@ lang_dict = {
     'Shanghainese': 'Xiaotong',
     'Mandarin': 'Xiaobei',
     'Spanish': 'Irene',
-    'German': 'Gisela'
+    'German': 'Gisela',
+    'Sinhala': 'Thilini',
+    'Urdu': 'Uzma',
+    'Hindi': 'Swara',
+    'French': 'Anne',
+    'Greek': 'Athina',
+    'Korean': 'SeoHyeon'
 }
 
 def make_speech(text, language, path):

@@ -3,7 +3,7 @@
 
 import os
 from pathlib import Path
-from openai_utils import translate_to_language, generate_response, translate_response_to_language, create_text_to_speech
+from openai_utils import translate_to_language, generate_response, translate_response_to_language
 from prompting import prompt_output_language
 from transcribe import transcribe_speech
 from facial.emotion import end_video, get_curr_emotion
