@@ -1,21 +1,21 @@
 # LingoBuddy
 ## Project Overview
-The Endangered Language Learning Elmo is a conversational AI-powered toy designed to preserve endangered languages by teaching children their native language in a fun and engaging way. This interactive tool allows children to converse with Elmo, who listens, translates, and responds in both English and the selected endangered language. Additionally, it leverages facial emotion recognition to make Elmo’s responses more empathetic and tailored to the child’s emotional state.
+LingoBuddy is a conversational AI-powered toy designed to preserve endangered languages by teaching children their native language in a fun and engaging way. This interactive tool allows children to converse with a familiar face: Elmo, who listens, translates, and responds in both English and a selected language. Additionally, it leverages facial emotion recognition to make LingoBuddy’s responses more empathetic and tailored to the child’s emotional state.
 
 ## How It Works
 ### Program Flow
 1. **Language Selection**:
-  - When the program is run, Elmo asks the child what language they want to learn or speak.
+  - When the program is run, LingoBuddy asks the child what language they want to learn or speak.
 2. **Speech Recognition**:
-  - The child speaks to Elmo in English.
+  - The child speaks to LingoBuddy in English.
   - Using Google Cloud Speech-to-Text, the spoken words are transcribed into text.
 3. **Language Translation**:
   - The transcribed text is sent to the OpenAI API, which translates it into the selected language.
 4. **Conversational Response**:
-- Elmo repeats the child’s message in the chosen language.
-- E  lmo also responds to the child in both English and the selected language, ensuring comprehension while encouraging language learning.
+  - LingoBuddy first repeats the child’s message in the chosen language, then responds.
+  - LingoBuddy responds to the child in both English and the selected language, ensuring comprehension while encouraging language learning.
 5. **Text-to-Speech Conversion**:
-  - Responses are converted into audio using SpeechGen.io to give Elmo a realistic voice in whatever language being spoken.
+  - Responses are converted into audio using SpeechGen.io to give Elmo a realistic, friendly voice in whatever language is being spoken.
 6. **Facial Emotion Recognition**:
   - Using an open-source facial emotion recognition repository, the child’s emotions are analyzed in real-time.
   - Elmo adapts his responses based on the child’s detected emotional state (e.g., using a more encouraging tone if the child seems frustrated).
@@ -40,3 +40,4 @@ The Endangered Language Learning Elmo is a conversational AI-powered toy designe
 
 **Bilingual Feedback**:
 - Combines English and the selected language in responses to enhance understanding and encourage learning.
+- Several endangered languages and dialects are available for selection, such as Cantonese, Shanghainese, Welsh, Basque, Azerbaijani, and Zulu.
