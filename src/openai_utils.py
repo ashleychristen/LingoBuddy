@@ -52,6 +52,29 @@ def generate_response(text, emotion):
     except Exception as e:
         logging.error(f"Error during response generation: {e}")
         return None
+    
+
+def get_language(text):
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {
+                    "role": "system", 
+                    "content": "You are an input validation assistant. A string will be provided that contains a language. Return " +
+                    "nothing but the name of the language. If it contains two languages, choose the first, unless the first is English " +
+                    "then choose the other."
+                },
+                {
+                    "role": "user",
+                    "content": f"Find the language in the following message: {text}"
+                }
+            ],
+            max_tokens=100)
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        logging.error(f"Error during response generation: {e}")
+        return None
 
 
 def translate_response_to_language(response, language):
