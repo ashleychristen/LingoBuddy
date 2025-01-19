@@ -14,6 +14,8 @@ def main():
     print("Prompting user to select language...")
     language = prompt_output_language()
     
+    emotion = 'Neutral'     # Change with input from camera
+    
     while True:
         print("Indicating user to begin speaking...")
         chime_filepath = Path(__file__).parent / "mp3/chime.mp3"

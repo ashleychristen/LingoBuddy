@@ -5,7 +5,7 @@ import threading
 import typing
 from socket import getaddrinfo as real_getaddrinfo
 from socket import timeout as SocketTimeout
-from test import SHORT_TIMEOUT
+from speechgen.speechgen import SHORT_TIMEOUT
 from unittest.mock import Mock, patch
 
 import pytest

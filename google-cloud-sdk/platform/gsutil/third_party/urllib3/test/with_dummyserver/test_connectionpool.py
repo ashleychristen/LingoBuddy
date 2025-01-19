@@ -5,7 +5,7 @@ import socket
 import time
 import typing
 import warnings
-from test import LONG_TIMEOUT, SHORT_TIMEOUT
+from speechgen.speechgen import LONG_TIMEOUT, SHORT_TIMEOUT
 from threading import Event
 from unittest import mock
 from urllib.parse import urlencode

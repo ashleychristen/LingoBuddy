@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import gc
 import socket
-from test import resolvesLocalhostFQDN
+from speechgen.speechgen import resolvesLocalhostFQDN
 from unittest import mock
 from unittest.mock import MagicMock, patch
 
