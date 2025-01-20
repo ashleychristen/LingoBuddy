@@ -1,4 +1,5 @@
 # LingoBuddy
+youtube.com/watch?v=iHlPPrr6cz0
 ## Project Overview
 LingoBuddy is a conversational AI-powered toy designed to preserve endangered languages by teaching children their native language in a fun and engaging way. This interactive tool allows children to converse with a familiar face: Elmo, who listens, translates, and responds in both English and a selected language. Additionally, it leverages facial emotion recognition to make LingoBuddy’s responses more empathetic and tailored to the child’s emotional state.
 
